@@ -1,3 +1,3 @@
 export const createUserCon = (req, res) => {
-    res.send("<h1>This is a User Create Page</h1>");
+    res.status(200).send("<h1>This is a user Page</h1>");
 }
