@@ -9,6 +9,8 @@ const storage = multer.diskStorage({
             cb(null, "public/CustomerPhone");
         }else if(file.fieldname === "stuphoto"){
             cb(null, "public/studentPhoto");
+        }else if(file.fieldname === "productPhoto"){
+            cb(null, "public/product");
         }
     },
     filename: (req, file, cb) => {
@@ -19,4 +21,5 @@ const storage = multer.diskStorage({
 // create multer middleware 
 export const userFileUploading = multer({storage}).single("file");
 export const customerFileUpload = multer({storage}).single("prophoto");
+export const productFileUpload = multer({storage}).single("productPhoto");
 export const studentFileUpload = multer({storage}).array("stuphoto", 5);
