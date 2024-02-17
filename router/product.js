@@ -1,12 +1,15 @@
 import express from "express";
-import { createProductMiddleware, getAllProduct } from "../controllers/createProductMiddleware.js";
+import { createProductMiddleware, getAllProduct, getSingleProduct } from "../controllers/createProductMiddleware.js";
 import { productFileUpload } from "../utilities/createMulterRouter.js";
 
 // init express js 
 const router = express.Router();
 
 // create a get reires project router
-router.get("/product", getAllProduct)
+router.get("/product", getAllProduct);
+
+// create a get reires project router
+router.get("/product/:slug", getSingleProduct)
 
 // create a post requires project router
 router.post("/product", productFileUpload, createProductMiddleware);

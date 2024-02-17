@@ -3,10 +3,9 @@ import fs from "fs";
 
 // create a product
 export const getAllProduct = (req, res) => {
-
-    const productData = JSON.parse(
-        fs.readFileSync("db/database.json").toString()
-      );
+  const productData = JSON.parse(
+    fs.readFileSync("db/database.json").toString()
+  );
 
   if (productData.length === 0) {
     res.status(404).json({ message: "Not Fountd Product Item" });
@@ -14,6 +13,26 @@ export const getAllProduct = (req, res) => {
   }
 
   res.status(200).json({ product: productData });
+};
+
+// create a single product
+export const getSingleProduct = (req, res) => {
+  //   get params data
+  const { slug } = req.params;
+
+  const productData = JSON.parse(
+    fs.readFileSync("db/database.json").toString()
+  );
+
+  const singleProduct = productData.find((data) => data.slug === slug);
+
+  //   single product not to database
+  if (!singleProduct) {
+    res.status(404).json({ message: "Single Product Not Found Is It Now" });
+  }
+
+  //   req single data to database showing
+  res.status(200).json(singleProduct);
 };
 
 // create a product item
@@ -52,7 +71,6 @@ export const createProductMiddleware = (req, res) => {
 
   // data push
   productData.push(product);
-
   fs.writeFileSync("db/database.json", JSON.stringify(productData));
 
   res.status(200).json({
