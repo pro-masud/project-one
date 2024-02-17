@@ -1,56 +1,87 @@
 import { createProductSlug, generateMongoId } from "../helper/helper.js";
 import fs from "fs";
 
-// create a product
+// get all product showing here now
 export const getAllProduct = (req, res) => {
+  /**
+   *  product parse showing
+   * */
   const productData = JSON.parse(
     fs.readFileSync("db/database.json").toString()
   );
 
+  /**
+   *  product not showing
+   * */
   if (productData.length === 0) {
     res.status(404).json({ message: "Not Fountd Product Item" });
     return;
   }
 
+  /**
+   *  get all product showing get router method
+   * */
   res.status(200).json({ product: productData });
 };
 
-// create a single product
+/**
+ *  create a single product function
+ * */
 export const getSingleProduct = (req, res) => {
-  //   get params data
+  /**
+   * get params router data
+   * */
   const { slug } = req.params;
 
+  /**
+   * got to database product find search
+   * */
   const productData = JSON.parse(
     fs.readFileSync("db/database.json").toString()
   );
 
+  /**
+   * single product find to database
+   * */
   const singleProduct = productData.find((data) => data.slug === slug);
 
-  //   single product not to database
+  /**
+   * single product not to database
+   * */
   if (!singleProduct) {
     res.status(404).json({ message: "Single Product Not Found Is It Now" });
   }
 
-  //   req single data to database showing
+  /**
+   * req single data to database showing
+   * */
   res.status(200).json(singleProduct);
 };
 
-// create a product item
+/**
+ * create a product item
+ * */
 export const createProductMiddleware = (req, res) => {
   const { name, regularPrice, salePrice, stock, productPhoto } = req.body;
 
-  //   not empty any fields
+  /**
+   * not empty any fields
+   * */
   if (!name || !regularPrice) {
     res.status(400).json({ message: "Name and Regular Price Is Empty" });
     return;
   }
 
-  //  create database width in json DB
+  /**
+   * create database width in json DB
+   * */
   const productData = JSON.parse(
     fs.readFileSync("db/database.json").toString()
   );
 
-  //  check product name llug
+  /**
+   * check product name llug
+   * */
   if (productData.some((data) => data.slug === createProductSlug(name))) {
     res
       .status(400)
@@ -58,7 +89,9 @@ export const createProductMiddleware = (req, res) => {
     return;
   }
 
-  // product data strecure
+  /**
+   * product data strecure
+   * */
   const product = {
     id: generateMongoId(),
     name,
@@ -69,10 +102,15 @@ export const createProductMiddleware = (req, res) => {
     productphoto: req.file.filename,
   };
 
-  // data push
+  /**
+   * product data push database
+   * */
   productData.push(product);
   fs.writeFileSync("db/database.json", JSON.stringify(productData));
 
+  /**
+   * Product data responsive
+   * */
   res.status(200).json({
     product,
     productPhoto,
