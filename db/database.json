@@ -1,1 +1,20 @@
-[{"id":"65d05bc769ce812dec9b8a43","name":"Alo Pro","regularPrice":"300","salePrice":"150","stock":"20","productphoto":"1708153799827_1843_423036366_3583227241937675_3796658663917540243_n.jpg"},{"id":"65d05bcadde37bcc6084ba9c","name":"Alo Pro","regularPrice":"300","salePrice":"150","stock":"20","productphoto":"1708153802530_9394_423036366_3583227241937675_3796658663917540243_n.jpg"},{"id":"65d06211b962967bdcf077c7","name":"Alo Pro","slug":"alo-pro","regularPrice":"300","salePrice":"150","stock":"20","productphoto":"1708155409145_1153_423036366_3583227241937675_3796658663917540243_n.jpg"}]
+[
+  {
+    "id": "65d0826af1d78cbe45d2e2ae",
+    "name": "Alo Pro",
+    "slug": "alo-pro",
+    "regularPrice": "300",
+    "salePrice": "150",
+    "stock": "20",
+    "productphoto": "1708163690041_2301_423036366_3583227241937675_3796658663917540243_n.jpg"
+  },
+  {
+    "id": "65d082ed2d29dfd6a577e834",
+    "name": "walton laptop",
+    "slug": "walton-laptop",
+    "regularPrice": "300",
+    "salePrice": "150",
+    "stock": "20",
+    "productphoto": "1708163821044_9116_423036366_3583227241937675_3796658663917540243_n.jpg"
+  }
+]

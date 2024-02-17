@@ -10,13 +10,27 @@ export const getAllProduct = (req, res) => {
 export const createProductMiddleware = (req, res) => {
   const { name, regularPrice, salePrice, stock, productPhoto } = req.body;
 
-  const productData = JSON.parse(fs.readFileSync("db/database.json").toString());
+  //   not empty any fields
+  if (!name || !regularPrice) {
+    res.status(400).json({ message: "Name and Regular Price Is Empty" });
+    return;
+  }
+
+  const productData = JSON.parse(
+    fs.readFileSync("db/database.json").toString()
+  );
+
+  //  check product name llug
+    if(productData.some((data) => data.slug === createProductSlug(name))){
+        res.status(400).json({message: "Product Slug Name All Ready Exesit ): ): ):"});
+        return;
+    }
 
   // product data strecure
   const product = {
     id: generateMongoId(),
     name,
-    'slug': createProductSlug(name),
+    slug: createProductSlug(name),
     regularPrice,
     salePrice,
     stock,
