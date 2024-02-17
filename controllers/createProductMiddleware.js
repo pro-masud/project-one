@@ -3,7 +3,17 @@ import fs from "fs";
 
 // create a product
 export const getAllProduct = (req, res) => {
-  res.status(200).json({ message: "Get All Product" });
+
+    const productData = JSON.parse(
+        fs.readFileSync("db/database.json").toString()
+      );
+
+  if (productData.length === 0) {
+    res.status(404).json({ message: "Not Fountd Product Item" });
+    return;
+  }
+
+  res.status(200).json({ product: productData });
 };
 
 // create a product item
@@ -16,15 +26,18 @@ export const createProductMiddleware = (req, res) => {
     return;
   }
 
+  //  create database width in json DB
   const productData = JSON.parse(
     fs.readFileSync("db/database.json").toString()
   );
 
   //  check product name llug
-    if(productData.some((data) => data.slug === createProductSlug(name))){
-        res.status(400).json({message: "Product Slug Name All Ready Exesit ): ): ):"});
-        return;
-    }
+  if (productData.some((data) => data.slug === createProductSlug(name))) {
+    res
+      .status(400)
+      .json({ message: "Product Slug Name All Ready Exesit ): ): ):" });
+    return;
+  }
 
   // product data strecure
   const product = {
