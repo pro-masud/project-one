@@ -1,6 +1,9 @@
 import { createProductSlug, generateMongoId } from "../helper/helper.js";
 import fs from "fs";
 
+
+
+
 // get all product showing here now
 export const getAllProduct = (req, res) => {
   /**
@@ -23,6 +26,14 @@ export const getAllProduct = (req, res) => {
    * */
   res.status(200).json({ product: productData });
 };
+
+
+
+
+
+
+
+
 
 /**
  *  create a single product function
@@ -52,17 +63,25 @@ export const getSingleProduct = (req, res) => {
     res.status(404).json({ message: "Single Product Not Found Is It Now" });
   }
 
+
+  
   /**
    * req single data to database showing
    * */
   res.status(200).json(singleProduct);
 };
 
+
+
+
 /**
  * create a product item
  * */
 export const createProductMiddleware = (req, res) => {
   const { name, regularPrice, salePrice, stock, productPhoto } = req.body;
+
+
+
 
   /**
    * not empty any fields
@@ -72,12 +91,21 @@ export const createProductMiddleware = (req, res) => {
     return;
   }
 
+
+
+
+
   /**
    * create database width in json DB
    * */
   const productData = JSON.parse(
     fs.readFileSync("db/database.json").toString()
   );
+
+
+
+
+
 
   /**
    * check product name llug
@@ -88,6 +116,12 @@ export const createProductMiddleware = (req, res) => {
       .json({ message: "Product Slug Name All Ready Exesit ): ): ):" });
     return;
   }
+
+
+
+
+
+
 
   /**
    * product data strecure
@@ -102,11 +136,23 @@ export const createProductMiddleware = (req, res) => {
     productphoto: req.file.filename,
   };
 
+
+
+
+
+
   /**
    * product data push database
    * */
   productData.push(product);
   fs.writeFileSync("db/database.json", JSON.stringify(productData));
+
+
+
+
+
+
+
 
   /**
    * Product data responsive
@@ -117,3 +163,33 @@ export const createProductMiddleware = (req, res) => {
     message: "create Product Successfully",
   });
 };
+
+
+/**
+ *  delets a single product function
+ * */
+export const getDeleteProduct = (req, res) => {
+    /**
+     * get params router data
+     * */
+    const { id } = req.params;
+  
+    /**
+     * got to database product find search
+     * */
+    const productData = JSON.parse(
+      fs.readFileSync("db/database.json").toString()
+    );
+  
+    /**
+     * single product find to database
+     * */
+    const singleProduct = productData.filter((data) => data.id !== id);
+        
+    fs.writeFileSync("db/database.json", JSON.stringify(singleProduct));
+    
+    /**
+     * req single data to database showing
+     * */
+    res.status(200).json({message: "Product Single Item Delete Successfully complete"});
+  };
