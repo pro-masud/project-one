@@ -13,6 +13,10 @@ dotenv.config();
 // init express 
 const app = express();
 
+
+// init ejs
+app.set("view engine", "ejs");
+
 // init dotenv portnumber
 const PORT = process.env.PORT || 6061;
 
