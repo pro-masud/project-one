@@ -7,6 +7,7 @@ import createCustomer from "./router/customer.js";
 import createStudent from "./router/students.js";
 import createProductMiddleware from "./router/product.js";
 import createDeveloper from "./router/developer.js";
+import createProducts from "./router/products.js";
 
 // dotenv config here
 dotenv.config();
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // init ejs
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 
 
 // // file and folder public status
@@ -34,6 +35,7 @@ app.use(createCustomer);
 app.use(createStudent); 
 app.use(createProductMiddleware); 
 app.use(createDeveloper); 
+app.use(createProducts); 
 
 // create a server within express js
 app.listen(PORT, () => {

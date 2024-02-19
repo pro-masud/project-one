@@ -1,3 +1,11 @@
 export const createCustomersController = (req, res) => {
-    res.status(201).json(req.body);
+    res.render('createproduct');
+}
+
+export const createViewControlloer = (req, res) => {
+    res.render('viewproduct');
+}
+
+export const singleProductView = (req, res) => {
+    res.render('singleproduct');
 }
