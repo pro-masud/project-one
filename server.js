@@ -6,6 +6,7 @@ import createUser from "./router/users.js";
 import createCustomer from "./router/customer.js";
 import createStudent from "./router/students.js";
 import createProductMiddleware from "./router/product.js";
+import createDeveloper from "./router/developer.js";
 
 // dotenv config here
 dotenv.config();
@@ -13,9 +14,16 @@ dotenv.config();
 // init express 
 const app = express();
 
+// json encodead
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // init ejs
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
+
+
+// // file and folder public status
+app.use(express.static("public"));
 
 // init dotenv portnumber
 const PORT = process.env.PORT || 6061;
@@ -25,6 +33,7 @@ app.use(createUser);
 app.use(createCustomer); 
 app.use(createStudent); 
 app.use(createProductMiddleware); 
+app.use(createDeveloper); 
 
 // create a server within express js
 app.listen(PORT, () => {

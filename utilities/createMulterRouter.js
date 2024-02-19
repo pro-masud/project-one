@@ -23,3 +23,4 @@ export const userFileUploading = multer({storage}).single("file");
 export const customerFileUpload = multer({storage}).single("prophoto");
 export const productFileUpload = multer({storage}).single("productPhoto");
 export const studentFileUpload = multer({storage}).array("stuphoto", 5);
+

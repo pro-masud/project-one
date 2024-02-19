@@ -7,7 +7,7 @@ import { userFileUploading } from "../utilities/createMulterRouter.js";
 const router = express.Router();
 
 // create user router here
-router.post("/user", userFileUploading, createUserCon);
+router.post("/user", createUserCon);
 
 
 // export default router here
